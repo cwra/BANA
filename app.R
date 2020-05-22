@@ -8,7 +8,8 @@ library(shiny)
 library(ggplot2)
 library(latex2exp)
 
-# Define UI for application 
+# Define UI for application that draws a histogram
+
 ui <- fluidPage(
   # Application title
   titlePanel("Critical Values for Normal and t-Distributions"),
@@ -84,7 +85,7 @@ server <- function(input, output) {
                        xend = loc,
                        yend = 0.02,
                        arrow = arrow(length = unit(0.1, "inches")))
-            + annotate('text', x = zneg, y = -0.03, label = round(zneg, 2))
+            + annotate('text', x = zneg, y = -0.03, label = round(zneg, 3))
             + annotate('segment', x = zneg, y = -0.02, xend=zneg, yend = 0, arrow = arrow(length = unit(0.1, "inches")) )
             
             )
@@ -101,7 +102,7 @@ server <- function(input, output) {
               xend = loc,
               yend = 0.02,
               arrow = arrow(length = unit(0.1, "inches")))
-            + annotate('text', x = zpos, y = -0.03, label = round(zpos, 2))
+            + annotate('text', x = zpos, y = -0.03, label = round(zpos, 3))
             + annotate('segment', x = zpos, y = -0.02, xend=zpos, yend = 0, arrow = arrow(length = unit(0.1, "inches")) )
             )
     }
