@@ -1,6 +1,6 @@
 #
 # This is a Shiny web application. 
-# Run it here: https://raschke.shinyapps.io/CriticalValues/
+# See it in action here: https://raschke.shinyapps.io/CriticalValues/
 #
 #
 
