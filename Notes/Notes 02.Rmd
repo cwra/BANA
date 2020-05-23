@@ -1,0 +1,106 @@
+---
+title: "BANA3363 Notes - 02 - Confidence Intervals"
+author: "Dr. Christian Raschke"
+date: "5/20/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+You can find further discussion of this topic in chapter 8 of the Anderson et. al text. 
+
+# Introduction
+
+We already learned that a sample statistics (such as a sample average) is a good estimate for a population parameter (the "true" average). For example, suppose the average customer satisfaction rating among those customers that filled out our survey was 6.4 on a scale from 1 to 10. Not all of our customers filled out the survey, but we might conclude that the average rating of 6.4 from those who did fill it out (i.e. the sample) is a good estimate of the satisfaction of \emph{all} of our customers (i.e. the population).
+
+When calculating a sample statistic, we get a \textbf{point estimate}. That is, we get just one number. Like 6.4 above. However, it is important to know how good that number is at estimating the population statistic. We aren't really interested in the sample; we just use the sample as a tool to learn something about the population. So we will want to know how good of a job the sample statistic is doing.
+
+We need \textbf{Confidence Intervals} for this. The book calls this concept an \textbf{Interval Estimate}. Both terms refer to the same concept. An interval estimate is often computed by adding and subtracting a value, called the margin of error, to the point estimate. The general form of an interval estimate is:
+\[
+\text{Point Estimate} \pm \text{Margin of Error}
+\]
+
+The  purpose  of  an  interval  estimate  is to provide us with a range of values that has some level of confidence attached to it. For example, we are 95\% confident that the customer satisfaction of \emph{all} of our customers is 6.4 plus/minus 0.3. Given our point estimate of 6.4 from the sample, we would say that we are 95\% sure that the true value of the population is between 6.1 and 6.7.
+
+In some sense, the confidence interval gives us an idea of the quality of our estimate. The smaller the margin of error for a given level of confidence, the more certain we can be that the sample statistic gave us precise information about the population. With a large margin of error, we still have a valid point estimate, but we are less confident about our estimate. (Just imagine, if we were 95\% confident that our average customer satisfaction is 6.4 plus/minus 3.5, then how much have we really learned about our customers' feelings?)
+
+The second consideration is the level of confidence. For example, suppose that I collected a random sample of home values in the Woodlands. The average home value of the sample is \$350,000. Given my data, I calculate some interval estimates such that
+
+  * 99\% confidence: $\$350,000 \pm \$50,000$ 
+  * 90\% confidence: $\$350,000 \pm \$32,000$
+  
+Given the data on hand, we face a tradeoff between how "tightly" we estimate the mean, and how confident we are about the estimate. Is is easy to be very confident about a range if you just make the range big enough...      
+  
+Our current topic is showing you how to calculate such ranges for varying confidence levels, given the data that you have for a problem. It is possible to estimate intervals for a variety of statistics, but we will focus on computing interval estimates of a population mean $\mu$ and a population proportion $p$. 
+
+The general form of an interval estimate of a population mean is $\bar{x} \pm \text{Margin of error.}$
+
+Similarly, the general form of an interval estimate of a population proportion is  $\bar{p} \pm \text{Margin of error.}$
+
+
+\clearpage
+
+# Confidence Intervals around the Population Mean
+In order to develop an interval estimate of a population mean, either the population standard deviation $\sigma$ or the sample standard deviation $s$ must be used to compute the margin of error. 
+
+Most of the time, we do \emph{not} know what $\sigma$ is. In those cases, we use the sample standard deviation, $s$, instead. Sometimes, for example in quality control applications, we \emph{do} know the population standard deviation. 
+
+We will discuss both cases, starting with the $\sigma$ known case. 
+
+## The $\sigma$ known case
+  
+The formula to use to calculate the confidence interval around a mean when $\sigma$ is known is
+  
+  \begin{equation}
+  \bar{x} \pm z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}} \label{knownci}
+  \end{equation}
+  
+where
+
+  * $z_{\frac{\alpha}{2}}$ is the z-value providing an area of $\alpha/2$ in the upper tail of the standard normal probability distribution.
+  * $\sigma$ is the known population standard deviation
+  * $n$ is the sample size
+  
+  The expression $\frac{\sigma}{\sqrt{n}}$ in the formula above is called the \textbf{Standard Error}. 
+  
+### Exercise
+\begin{enumerate}
+\item 
+\begin{description}
+\item[]
+Suppose that a machine in the Deluxe Quarter Pounder line at our meat processing plant is forming patties of beef. The machine's portions vary slightly due to the chunky nature of ground beef, and the known standard deviation of the patty weight is 10 grams. 
+Quality control inspectors have randomly sampled 25 beef patties, and determined that their average weight is 108 grams. 
+Construct a 95\% confidence interval of the size of patty the machine is currently producing.  
+\item [Solution]
+We apply formula \eqref{knownci} and use $\bar{x} = 108$, $z_{\frac{\alpha}{2}} = 1.96$, $\sigma = 10$, and $n=25$. We get 
+\begin{align*}
+  \bar{x} &\pm z_{\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}} \\
+  108 &\pm 1.96 \frac{10}{\sqrt{25}} \\
+  108 &\pm 3.92
+\end{align*}
+This means that we are 95\% confident that the average weight of all patties that the machine produces is between 104.08 grams and 111.92 grams. 
+
+Since a quarter pound is 113 grams, should the machine be recalibrated? We will talk about formally testing questions like this in the next unit. But for now, it should give you pause to recognize that the machine is supposed to make 113 gram patties, which falls outside of our confidence interval of actual production.
+
+\end{description}
+\end{enumerate}
+
+  
+  
+  
+ 
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+```
+
