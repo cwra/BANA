@@ -29,10 +29,11 @@ ui <- fluidPage(
       "Degrees of freedom:",
       10,
       min = 1,
-      max = 100000
+      max = 100000,
+      step = 1
     )
   ),
-  numericInput("alpha", "alpha", 0.05, min(0.000001, max = 0.99999999)),
+  numericInput("alpha", "alpha", value = 0.05, min = 0.001, max = 0.999),
   radioButtons(
     "tail",
     "Which tail?",
@@ -45,8 +46,19 @@ ui <- fluidPage(
   plotOutput("distPlot", width = "80%")
 )
 
+
 server <- function(input, output) {
   output$distPlot <- renderPlot({
+    validate(
+      need(input$alpha > 0 & input$alpha < 1, 'alpha must be bigger than 0 and less than 1!')
+    )
+    if ("degfree" %in% names(input)) {
+      validate(
+        need(input$degfree >= 1, "Degrees of freedom must be positive"),
+        need(as.integer(input$degfree) == input$degfree, "Degrees of freedom must be an integer value")
+      )
+    }
+
     ddist <-
       switch(
         input$disttype,
